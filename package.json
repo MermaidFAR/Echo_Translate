@@ -10,7 +10,7 @@
     "url": "https://github.com/MermaidFAR/Echo_Translate.git"
   },
   "scripts": {
-    "test": "node --test tests/*.test.mjs",
+    "test": "node --test --test-reporter=tap tests/*.test.mjs",
     "build": "node tools/build.mjs",
     "check": "node tools/check.mjs",
     "test:browser": "node --test tests/browser-smoke.test.mjs",
