@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>文档双语翻译</title>
+  <link rel="stylesheet" href="../src/ui.css">
+</head>
+<body>
+  <main class="app-shell documents-app">
+    <header class="page-header">
+      <div><p class="eyebrow">DOCUMENTS</p><h1>文档双语翻译</h1><p>提取文字，经您配置的 API 翻译，在本机预览并导出。</p></div>
+      <a href="options.html">返回设置</a>
+    </header>
+    <section class="card">
+      <label for="document-file">选择文件（最大 40 MB）</label>
+      <input id="document-file" type="file" accept=".txt,.md,.html,.htm,.json,.srt,.vtt,.ass,.ssa,.lrc,.docx,.epub,.pdf">
+      <p class="muted">支持 TXT、Markdown、HTML、JSON、SRT/VTT/ASS/LRC、DOCX、EPUB 和含文本层的 PDF。源文件保留在本机，提取出的文字会发送给您配置的翻译 API。</p>
+      <div class="form-grid">
+        <label>原文语言 <input id="source-language" value="auto" placeholder="auto"></label>
+        <label>目标语言 <input id="target-language" value="zh-CN" placeholder="zh-CN"></label>
+        <label>导出内容 <select id="export-mode"><option value="bilingual">原文 + 译文</option><option value="translated">仅译文</option></select></label>
+      </div>
+      <label>翻译要求（可选）<textarea id="document-context" rows="2" maxlength="4000" placeholder="例如：学术论文，保留专业术语、Markdown 标记和字幕标签。"></textarea></label>
+      <div class="button-row"><button id="translate-document" disabled>开始翻译</button><button id="cancel-document" disabled>取消</button><button id="export-document" disabled>导出文件</button><button id="export-preview" disabled>导出双语 HTML</button></div>
+      <progress id="document-progress" max="1" value="0" aria-label="翻译进度"></progress>
+      <p id="document-status" role="status" aria-live="polite">请选择文件。</p>
+      <p id="document-error" role="alert" class="error"></p>
+      <p id="document-note" class="muted"></p>
+    </section>
+    <section id="pdf-font-panel" class="card" hidden>
+      <h2>PDF 中文字体</h2>
+      <p>导出带中文的 PDF 需要字体。您可以上传本地 TTF/OTF，或主动下载开源 Noto Sans CJK 字体（约 16 MB）。字体保留在本页内存中。</p>
+      <input id="pdf-font-file" type="file" accept=".ttf,.otf"><button id="download-pdf-font">下载开源中文字体</button>
+      <p id="pdf-font-status" role="status">尚未选择字体。</p>
+      <p class="muted">PDF 导出按“原文页 → 对应译文页”排列，长译文自动续页。公式、图表保留在原文页；译文使用单栏排版。扫描 PDF 需先进行 OCR。表单、签名和书签不保证保留。</p>
+    </section>
+    <section id="pdf-original-panel" class="card" hidden>
+      <h2>PDF 原文页</h2><label>页码 <select id="pdf-page-select"></select></label><canvas id="pdf-page-canvas" aria-label="PDF 原文预览"></canvas>
+    </section>
+    <section class="card"><h2>双语预览</h2><p id="preview-summary" class="muted"></p><div id="document-preview"></div><button id="show-more-preview" hidden>显示更多段落</button></section>
+  </main>
+  <script type="module" src="../src/documents.js"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "testedAt": "2026-10-16T03:47:49.988Z",
+  "status": "pass",
+  "browser": "155.0.8059.40",
+  "scope": "仅显示排版；模型、提示词、缓存协议沿用上一版。译文为固定模拟文本，不评价翻译质量。",
+  "authorsGrouped": true,
+  "originalNodesAndDirectChildSelectorsPreserved": true,
+  "hiddenLabelsExcluded": true,
+  "inheritsFontColorSizeLineHeight": true,
+  "darkThemeInheritance": true,
+  "compactInlineLabels": true,
+  "identicalTranslationsSuppressed": true,
+  "accentStyleOptional": true,
+  "paragraphIndicatorRetained": true,
+  "indicatorOptional": true,
+  "adaptiveThemes": [
+    "news",
+    "docs",
+    "cards",
+    "rtl"
+  ],
+  "rightToLeftIndicator": true,
+  "originalDirectChildStylesUnchanged": true,
+  "screenshot": "evidence/screenshots/reading-natural.png"
+}

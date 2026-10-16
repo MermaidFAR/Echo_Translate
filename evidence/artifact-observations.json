@@ -1,0 +1,154 @@
+{
+  "capturedAt": "2026-10-16T03:05:25.158Z",
+  "input": "C:\\Users\\FAR\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\bpoadfkcbjbfhfodiogcnhhhpibjhbnh\\1.33.3_0",
+  "manifest": {
+    "name": "__MSG_brandName__",
+    "version": "1.33.3",
+    "manifest_version": 3,
+    "background": {
+      "service_worker": "background.js"
+    },
+    "permissions": [
+      "storage",
+      "activeTab",
+      "contextMenus",
+      "webRequest",
+      "declarativeNetRequestWithHostAccess",
+      "declarativeNetRequestFeedback",
+      "declarativeNetRequest",
+      "offscreen",
+      "sidePanel"
+    ],
+    "options_page": "options.html"
+  },
+  "deepseek": {
+    "provider": "custom",
+    "apiUrl": "https://api.deepseek.com/chat/completions",
+    "model": "deepseek-flash",
+    "models": "deepseek-flash|deepseek-v4-pro",
+    "supportFeatures": [
+      "aiWriting",
+      "selectionTranslation"
+    ],
+    "modelsOverrides": [
+      {
+        "models": [
+          "deepseek-flash",
+          "deepseek-v4-pro"
+        ],
+        "bodyConfigs": {
+          "thinking": {
+            "type": "disabled"
+          }
+        }
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "manifest.json",
+      "bytes": 5205,
+      "sha256": "a1b0dbb1b55289eb781211fab3933521a63f61b32b9a8bae548e732f994c57b5"
+    },
+    {
+      "path": "background.js",
+      "bytes": 865856,
+      "sha256": "701ce3c15e3cf83ef6b1b2ef91f7d151b16c9da9ae93ce43586b00dbdea6f06a"
+    },
+    {
+      "path": "content_guard.js",
+      "bytes": 33532,
+      "sha256": "a87051a76e48f8b1e252341d273cdcf06dd6cd135c94ad76a715efb55db42c56"
+    },
+    {
+      "path": "content_main.js",
+      "bytes": 4145194,
+      "sha256": "ff4364923db1b01b7600c29074b4d800c30fd235781643f1501e02500f7eca93"
+    },
+    {
+      "path": "options.js",
+      "bytes": 3959517,
+      "sha256": "58db87a3f5f3d5406f7848bc4049dddc614bf35557360254363b3b3d3bf12a6a"
+    },
+    {
+      "path": "popup.js",
+      "bytes": 1910278,
+      "sha256": "00b1537f686953a809b22a53b2f596684ed14e10efb512f4267630853c94c7c2"
+    },
+    {
+      "path": "offscreen.js",
+      "bytes": 1162454,
+      "sha256": "2416ea482986d415a5f78b8bd89e75252c89f3f05214952efae59b7779d898f1"
+    },
+    {
+      "path": "side-panel.js",
+      "bytes": 3327972,
+      "sha256": "0a72fd0213bf95e0fba2a97ae20e1ea11c674b5c05fe24af78daf1581088a3c5"
+    },
+    {
+      "path": "default_config.json",
+      "bytes": 532258,
+      "sha256": "74502fffc1540c900eec63714daa9ee5a744483c1f4b83e091251a7d1cddc375"
+    },
+    {
+      "path": "default_config.content.json",
+      "bytes": 187862,
+      "sha256": "1167196fad42995a3a8416a3c6c5a54551f6261f2a68591d98fca89329a90b37"
+    },
+    {
+      "path": "pdf/index.html",
+      "bytes": 3337,
+      "sha256": "036f11327ebf5340a5290cc1189c1607508ca429d0b530033e99523978177824"
+    },
+    {
+      "path": "pdf/extension-entry.js",
+      "bytes": 2191,
+      "sha256": "d14a82b0de72b991b82f364b59e173516da6a48b8992b75e82643ece8b6b4f4c"
+    }
+  ],
+  "snippets": [
+    {
+      "path": "pdf/index.html",
+      "seed": "app.immersivetranslate.com/pdf",
+      "offset": 3078,
+      "line": 46,
+      "snippet": "   }\n    </style>\n  </head>\n  <body style=\"padding:0px;margin:0px;\">\n    <iframe\n      src=\"https://app.immersivetranslate.com/pdf?file=emptyfile\"\n      width=\"100%\"\n      style=\"min-height: 100vh;border-width: 0px;\"\n    ></iframe>\n    <div id=\"loading\" class=\"loading loading-fixed\"></div>\n\n    <script src=\"./extension-entry.js\""
+    },
+    {
+      "path": "pdf/extension-entry.js",
+      "seed": "postMessage",
+      "offset": 756,
+      "line": 28,
+      "snippet": ";\n  })\n    .then((blob) => {\n      waitIframeLoad().then(function () {\n        iframe.contentWindow.postMessage({\n          type: \"pdf-local-file\",\n          blob: blob,\n          fileName: getDecodedFileName(filePath),\n        }, \"*\");\n      });\n    }).catch(function (err) {\n      console.error(err);\n      re"
+    },
+    {
+      "path": "options.js",
+      "seed": "serviceKey:\"deepseek\"",
+      "offset": 452044,
+      "line": 7504,
+      "snippet": "1:\"https://www.deepseek.com/\",descriptionLink2:j.BASE_SITE+\"docs/services/deepseek/\"}],allProps:yg({serviceKey:\"deepseek\",defaultApiUrl:\"https://api.deepseek.com/chat/completions\"})},openai:{ai:!0,name:\"Open AI\",homepage:\"https://openai.com/api/\",docUrl:j.BASE_SITE+\"docs/services/openai/\",link1:\"https://readit.plus/a/GK"
+    },
+    {
+      "path": "options.js",
+      "seed": "services.consent.supportFeatures",
+      "offset": 2138130,
+      "line": 8292,
+      "snippet": "ices.consent.description.1\")}}),c(\"div\",{style:{margin:\"16px 0\"},dangerouslySetInnerHTML:{__html:i(\"services.consent.supportFeatures\")}}),c(\"div\",{dangerouslySetInnerHTML:{__html:i(\"services.consent.description.2\")}}),c(\"div\",{dangerouslySetInnerHTML:{__html:i(\"services.consent.description.3\",{text:o})}}),c(\"input\",{value:a,onInpu"
+    },
+    {
+      "path": "content_main.js",
+      "seed": "APIKEY is encrypted",
+      "offset": 1417485,
+      "line": 5393,
+      "snippet": "w,o.provider&&(this.provider=o.provider),o.APIKEY){if(Qy(o.APIKEY))throw new fe(\"IMT_ENCRYPT_ERROR: APIKEY is encrypted, please decrypt it first\");let c=o.APIKEY?.trim();this.apiKeys=c.split(\",\").map(g=>g.trim())}if(Array.isArray(o.ignoreResRegexs)&&(this.ignoreResReges=o.ignoreResRegexs),Array.isArray(o.removeResRege"
+    },
+    {
+      "path": "content_main.js",
+      "seed": "u.headers.Authorization=\"Bearer \"+c",
+      "offset": 1444881,
+      "line": 5400,
+      "snippet": "y(l,null,2),timeout:this.requestTimeout,retry:this.retry,signal:o},c=this.getRandomKey();return c&&(u.headers.Authorization=\"Bearer \"+c,u.headers[\"api-key\"]=c),u}getMaxOutputTokensBodyConfig(t){return this.maxOutputTokens===void 0?{}:{[t]:this.maxOutputTokens}}getChatMaxOutputTokensField(){return\"max_tokens\"}},Xi=Ky});var HD,or,xa=X("
+    }
+  ],
+  "scope": "仅静态安装包。没有读取浏览器配置数据库、API Key、Cookie、账号状态；没有运行原扩展。"
+}

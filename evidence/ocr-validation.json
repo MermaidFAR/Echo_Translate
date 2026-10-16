@@ -1,0 +1,17 @@
+{
+  "executedAt": "2026-10-16T03:07:51.463Z",
+  "status": "pass",
+  "browser": "155.0.8059.40",
+  "localWorkerAndWasm": true,
+  "language": "eng",
+  "externalLanguageDataUrl": "https://tessdata.projectnaptha.com/4.0.0",
+  "translationApiCalled": false,
+  "recognizedText": "HELLO ECHO TRANSLATE",
+  "result": "识别到 1 个文字框。可校正原文、移动和调整框，再点击翻译。",
+  "screenshot": "evidence/screenshots/media-ocr.png",
+  "notCovered": [
+    "其他OCR语言",
+    "复杂漫画、竖排、手写体",
+    "离线语言数据导入"
+  ]
+}

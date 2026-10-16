@@ -1,0 +1,268 @@
+
+> echo-translate@0.1.1 test
+> node --test tests/*.test.mjs
+
+TAP version 13
+# Subtest: 官方、v1 和完整地址正确规范化；拒绝泄露式和非 HTTPS 地址
+ok 1 - 官方、v1 和完整地址正确规范化；拒绝泄露式和非 HTTPS 地址
+  ---
+  duration_ms: 0.8555
+  type: 'test'
+  ...
+# Subtest: 按编号恢复模型返回顺序；拒绝漏项、重复和无效编号
+ok 2 - 按编号恢复模型返回顺序；拒绝漏项、重复和无效编号
+  ---
+  duration_ms: 0.8221
+  type: 'test'
+  ...
+# Subtest: 文本分段往返保持换行与 Unicode，不切断代理对
+ok 3 - 文本分段往返保持换行与 Unicode，不切断代理对
+  ---
+  duration_ms: 0.2351
+  type: 'test'
+  ...
+# Subtest: 请求使用用户接口、术语和官方协议；缓存避免相同请求
+ok 4 - 请求使用用户接口、术语和官方协议；缓存避免相同请求
+  ---
+  duration_ms: 20.8491
+  type: 'test'
+  ...
+# Subtest: 跨调用并发上限生效，结果保序
+ok 5 - 跨调用并发上限生效，结果保序
+  ---
+  duration_ms: 52.6966
+  type: 'test'
+  ...
+# Subtest: 401不重试、不转发服务端可能包含密钥的错误正文
+ok 6 - 401不重试、不转发服务端可能包含密钥的错误正文
+  ---
+  duration_ms: 1.6054
+  type: 'test'
+  ...
+# Subtest: 取消能中断正在执行与排队的请求
+ok 7 - 取消能中断正在执行与排队的请求
+  ---
+  duration_ms: 43.725
+  type: 'test'
+  ...
+# Subtest: 批量协议不匹配时回退逐条，避免错配译文
+ok 8 - 批量协议不匹配时回退逐条，避免错配译文
+  ---
+  duration_ms: 2.1706
+  type: 'test'
+  ...
+# Subtest: 设置仅保留已知字段；域名规则有明确边界
+ok 9 - 设置仅保留已知字段；域名规则有明确边界
+  ---
+  duration_ms: 0.3313
+  type: 'test'
+  ...
+# Subtest: audio upload validates nonempty supported media and 20 MiB message budget
+ok 10 - audio upload validates nonempty supported media and 20 MiB message budget
+  ---
+  duration_ms: 1.032
+  type: 'test'
+  ...
+# Subtest: ASR result must contain timed SRT or VTT and propagates failures
+ok 11 - ASR result must contain timed SRT or VTT and propagates failures
+  ---
+  duration_ms: 0.8887
+  type: 'test'
+  ...
+# Subtest: 隔离无头 Chrome：扩展实际加载、网页/设置/文档/媒体通过本地 mock API
+    # Subtest: 设置页、模型列表、公开配置无密钥、API 测试
+    ok 1 - 设置页、模型列表、公开配置无密钥、API 测试
+      ---
+      duration_ms: 311.8172
+      type: 'test'
+      ...
+    # Subtest: 真实 content script：双语、隐藏与代码排除、动态段落、恢复原 DOM 与监听器
+    ok 2 - 真实 content script：双语、隐藏与代码排除、动态段落、恢复原 DOM 与监听器
+      ---
+      duration_ms: 619.3991
+      type: 'test'
+      ...
+    # Subtest: 选中解释与输入框翻译触发真实消息链
+    ok 3 - 选中解释与输入框翻译触发真实消息链
+      ---
+      duration_ms: 43.0236
+      type: 'test'
+      ...
+    # Subtest: 仅译文模式、侧栏翻译与请求取消
+    ok 4 - 仅译文模式、侧栏翻译与请求取消
+      ---
+      duration_ms: 33429.0854
+      type: 'test'
+      ...
+    # Subtest: TXT、HTML、JSON 与字幕：导入、mock 翻译、双语导出和结构保留
+    ok 5 - TXT、HTML、JSON 与字幕：导入、mock 翻译、双语导出和结构保留
+      ---
+      duration_ms: 563.5439
+      type: 'test'
+      ...
+    # Subtest: DOCX 与 EPUB：本地 ZIP vendor、正文翻译导出及未改附件保留
+    ok 6 - DOCX 与 EPUB：本地 ZIP vendor、正文翻译导出及未改附件保留
+      ---
+      duration_ms: 242.3393
+      type: 'test'
+      ...
+    # Subtest: PDF：实际本地 worker 提取、canvas 预览、中文字体与双语 PDF 导出
+    ok 7 - PDF：实际本地 worker 提取、canvas 预览、中文字体与双语 PDF 导出
+      ---
+      duration_ms: 404.1089
+      type: 'test'
+      ...
+    # Subtest: 图片：本地组件加载、编辑文字框、mock 翻译、PNG/TXT 导出
+    ok 8 - 图片：本地组件加载、编辑文字框、mock 翻译、PNG/TXT 导出
+      ---
+      duration_ms: 431.4861
+      type: 'test'
+      ...
+    # Subtest: 独立 ASR：multipart mock 转写、字幕翻译、SRT/VTT 导出
+    ok 9 - 独立 ASR：multipart mock 转写、字幕翻译、SRT/VTT 导出
+      ---
+      duration_ms: 338.6221
+      type: 'test'
+      ...
+    # Subtest: 实时音频：真实 MediaRecorder 合成音源、finish/abort、mock 直播字幕链与网页叠加
+    ok 10 - 实时音频：真实 MediaRecorder 合成音源、finish/abort、mock 直播字幕链与网页叠加
+      ---
+      duration_ms: 1069.5014
+      type: 'test'
+      ...
+# 本地 mock 端到端执行结束；真实 DeepSeek API 未调用。共 19 次 mock 模型请求；通过状态见测试计数。
+    1..10
+ok 12 - 隔离无头 Chrome：扩展实际加载、网页/设置/文档/媒体通过本地 mock API
+  ---
+  duration_ms: 39098.9417
+  type: 'test'
+  ...
+# Subtest: 格式识别与文本过滤
+ok 13 - 格式识别与文本过滤
+  ---
+  duration_ms: 1.3492
+  type: 'test'
+  ...
+# Subtest: 区间导出保留分隔和验证重叠
+ok 14 - 区间导出保留分隔和验证重叠
+  ---
+  duration_ms: 0.6148
+  type: 'test'
+  ...
+# Subtest: Markdown 不翻译代码围栏与缩进代码
+ok 15 - Markdown 不翻译代码围栏与缩进代码
+  ---
+  duration_ms: 0.8597
+  type: 'test'
+  ...
+# Subtest: SRT 保留序号时间轴及换行格式
+ok 16 - SRT 保留序号时间轴及换行格式
+  ---
+  duration_ms: 0.6294
+  type: 'test'
+  ...
+# Subtest: WebVTT 不改 WEBVTT、NOTE、STYLE 和 cue 标识
+ok 17 - WebVTT 不改 WEBVTT、NOTE、STYLE 和 cue 标识
+  ---
+  duration_ms: 0.2007
+  type: 'test'
+  ...
+# Subtest: LRC 多时间标签双语重复时间轴，保留元数据
+ok 18 - LRC 多时间标签双语重复时间轴，保留元数据
+  ---
+  duration_ms: 0.1633
+  type: 'test'
+  ...
+# Subtest: ASS 保留事件字段、逗号与开头样式标签
+ok 19 - ASS 保留事件字段、逗号与开头样式标签
+  ---
+  duration_ms: 0.4945
+  type: 'test'
+  ...
+# Subtest: JSON 只替换字符串值，保留数据形状和危险属性名
+ok 20 - JSON 只替换字符串值，保留数据形状和危险属性名
+  ---
+  duration_ms: 0.4423
+  type: 'test'
+  ...
+# Subtest: 长文本分块可无损还原并不切断代理对
+ok 21 - 长文本分块可无损还原并不切断代理对
+  ---
+  duration_ms: 0.5778
+  type: 'test'
+  ...
+# Subtest: ZIP 解析拒绝路径穿越和解压超限
+ok 22 - ZIP 解析拒绝路径穿越和解压超限
+  ---
+  duration_ms: 0.4596
+  type: 'test'
+  ...
+# Subtest: HTML 和 XHTML 导出保留结构且不执行源脚本
+ok 23 - HTML 和 XHTML 导出保留结构且不执行源脚本
+  ---
+  duration_ms: 58.6258
+  type: 'test'
+  ...
+# Subtest: 文档页 mock 集成：文本/JSON/HTML/字幕和 DOCX/EPUB 保留资源导出、取消后继续
+ok 24 - 文档页 mock 集成：文本/JSON/HTML/字幕和 DOCX/EPUB 保留资源导出、取消后继续
+  ---
+  duration_ms: 546.3131
+  type: 'test'
+  ...
+# Subtest: 实时音频字幕按录制时间偏移，保留原文和译文
+ok 25 - 实时音频字幕按录制时间偏移，保留原文和译文
+  ---
+  duration_ms: 1.5465
+  type: 'test'
+  ...
+# Subtest: 论文网页自然显示：整行作者、继承字体、行内标签、隐藏描述及原 DOM 保留
+ok 26 - 论文网页自然显示：整行作者、继承字体、行内标签、隐藏描述及原 DOM 保留
+  ---
+  duration_ms: 3904.8791
+  type: 'test'
+  ...
+# Subtest: 多视频字幕：复用控制器、时间同步、真实取消信号与移除清理
+ok 27 - 多视频字幕：复用控制器、时间同步、真实取消信号与移除清理
+  ---
+  duration_ms: 138.6881
+  type: 'test'
+  ...
+# Subtest: SRT preserves multiline cues, UTF-8 and millisecond precision
+ok 28 - SRT preserves multiline cues, UTF-8 and millisecond precision
+  ---
+  duration_ms: 2.3139
+  type: 'test'
+  ...
+# Subtest: WebVTT supports cue IDs, settings, annotations and comments
+ok 29 - WebVTT supports cue IDs, settings, annotations and comments
+  ---
+  duration_ms: 0.2758
+  type: 'test'
+  ...
+# Subtest: timestamp rounding carries into next second and handles long videos
+ok 30 - timestamp rounding carries into next second and handles long videos
+  ---
+  duration_ms: 0.2741
+  type: 'test'
+  ...
+# Subtest: bilingual and translation exports retain timing
+ok 31 - bilingual and translation exports retain timing
+  ---
+  duration_ms: 0.2234
+  type: 'test'
+  ...
+# Subtest: YouTube JSON3 and XML transcripts are parsed without executing markup
+ok 32 - YouTube JSON3 and XML transcripts are parsed without executing markup
+  ---
+  duration_ms: 0.4521
+  type: 'test'
+  ...
+1..32
+# tests 42
+# suites 0
+# pass 42
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 39466.781

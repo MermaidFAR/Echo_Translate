@@ -1,0 +1,182 @@
+{
+  "generatedAt": "2026-10-16T03:57:04.656Z",
+  "timezone": "Asia/Shanghai",
+  "status": "pass",
+  "artifact": {
+    "path": "dist/Echo_Translate.zip",
+    "bytes": 21192777,
+    "sha256": "8ddda247c7d9552fbbc1f3613918c2b4d9f48a2c45ce8b3ce92d91bb1ab945a3",
+    "builtAt": "2026-10-16T03:57:04.086Z"
+  },
+  "sourceArchive": "dist/Echo_Translate_Source.zip",
+  "sourceMatchesBuiltExtension": {
+    "status": "pass",
+    "mismatches": []
+  },
+  "tests": {
+    "command": "npm test",
+    "tests": 42,
+    "passed": 42,
+    "failed": 0,
+    "skipped": 0,
+    "durationMs": 39466.781,
+    "output": "evidence/test-output.txt"
+  },
+  "staticChecks": {
+    "command": "npm run check",
+    "status": "pass",
+    "output": "evidence/check-output.txt"
+  },
+  "dependencyAudit": {
+    "command": "npm audit --omit=dev --json",
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "output": "evidence/dependency-audit.json"
+  },
+  "browser": {
+    "executedAt": "2026-10-16T03:48:25.256Z",
+    "browser": "155.0.8059.40",
+    "headless": true,
+    "isolatedTemporaryProfile": true,
+    "actualUserProfileUsed": false,
+    "api": {
+      "realDeepSeekCalled": false,
+      "translationMockRequests": 19,
+      "asrMockRequests": 2
+    },
+    "longRequest": {
+      "configuredMockDelayMs": 33000,
+      "verified": true
+    },
+    "liveAudio": {
+      "actualMediaRecorder": true,
+      "input": "AudioContext 人工合成音轨",
+      "nativeGetDisplayMediaCalled": false,
+      "systemAudioOrMicrophoneCaptured": false,
+      "asrAndTranslation": "本地 mock",
+      "verified": true
+    },
+    "screenshots": [
+      "evidence/screenshots/options.png",
+      "evidence/screenshots/documents.png",
+      "evidence/screenshots/media.png"
+    ],
+    "results": [
+      {
+        "name": "设置页、模型列表、公开配置无密钥、API 测试",
+        "status": "pass",
+        "durationMs": 311
+      },
+      {
+        "name": "真实 content script：双语、隐藏与代码排除、动态段落、恢复原 DOM 与监听器",
+        "status": "pass",
+        "durationMs": 619
+      },
+      {
+        "name": "选中解释与输入框翻译触发真实消息链",
+        "status": "pass",
+        "durationMs": 43
+      },
+      {
+        "name": "仅译文模式、侧栏翻译与请求取消",
+        "status": "pass",
+        "durationMs": 33429
+      },
+      {
+        "name": "TXT、HTML、JSON 与字幕：导入、mock 翻译、双语导出和结构保留",
+        "status": "pass",
+        "durationMs": 563
+      },
+      {
+        "name": "DOCX 与 EPUB：本地 ZIP vendor、正文翻译导出及未改附件保留",
+        "status": "pass",
+        "durationMs": 242
+      },
+      {
+        "name": "PDF：实际本地 worker 提取、canvas 预览、中文字体与双语 PDF 导出",
+        "status": "pass",
+        "durationMs": 404
+      },
+      {
+        "name": "图片：本地组件加载、编辑文字框、mock 翻译、PNG/TXT 导出",
+        "status": "pass",
+        "durationMs": 431
+      },
+      {
+        "name": "独立 ASR：multipart mock 转写、字幕翻译、SRT/VTT 导出",
+        "status": "pass",
+        "durationMs": 338
+      },
+      {
+        "name": "实时音频：真实 MediaRecorder 合成音源、finish/abort、mock 直播字幕链与网页叠加",
+        "status": "pass",
+        "durationMs": 1069
+      }
+    ],
+    "pageErrors": [],
+    "notCovered": [
+      "真实 DeepSeek API 与计费",
+      "真实第三方 ASR 服务",
+      "真实系统音源选择器、会议平台或直播音轨采集",
+      "真实 YouTube/各站点专用适配",
+      "大型复杂文档与精准 PDF 版式重排",
+      "各 OCR 语言、手写体与复杂漫画"
+    ]
+  },
+  "ocr": {
+    "executedAt": "2026-10-16T03:07:51.463Z",
+    "status": "pass",
+    "browser": "155.0.8059.40",
+    "localWorkerAndWasm": true,
+    "language": "eng",
+    "externalLanguageDataUrl": "https://tessdata.projectnaptha.com/4.0.0",
+    "translationApiCalled": false,
+    "recognizedText": "HELLO ECHO TRANSLATE",
+    "result": "识别到 1 个文字框。可校正原文、移动和调整框，再点击翻译。",
+    "screenshot": "evidence/screenshots/media-ocr.png",
+    "notCovered": [
+      "其他OCR语言",
+      "复杂漫画、竖排、手写体",
+      "离线语言数据导入"
+    ]
+  },
+  "readingLayout": {
+    "testedAt": "2026-10-16T03:47:49.988Z",
+    "status": "pass",
+    "browser": "155.0.8059.40",
+    "scope": "仅显示排版；模型、提示词、缓存协议沿用上一版。译文为固定模拟文本，不评价翻译质量。",
+    "authorsGrouped": true,
+    "originalNodesAndDirectChildSelectorsPreserved": true,
+    "hiddenLabelsExcluded": true,
+    "inheritsFontColorSizeLineHeight": true,
+    "darkThemeInheritance": true,
+    "compactInlineLabels": true,
+    "identicalTranslationsSuppressed": true,
+    "accentStyleOptional": true,
+    "paragraphIndicatorRetained": true,
+    "indicatorOptional": true,
+    "adaptiveThemes": [
+      "news",
+      "docs",
+      "cards",
+      "rtl"
+    ],
+    "rightToLeftIndicator": true,
+    "originalDirectChildStylesUnchanged": true,
+    "screenshot": "evidence/screenshots/reading-natural.png"
+  },
+  "boundaries": {
+    "realDeepSeekApiCalled": false,
+    "realAsrApiCalled": false,
+    "paidModelUsage": false,
+    "userBrowserProfileAccessed": false,
+    "externalPublicDownload": "OCR 英语语言数据（tessdata.projectnaptha.com）",
+    "localTestFont": "C:/Windows/Fonts/simhei.ttf，仅用于测试，不随成品打包"
+  }
+}

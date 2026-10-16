@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.log
+test-results/
+evidence/screenshots/
+evidence/browser-profile/
+.DS_Store
+Thumbs.db

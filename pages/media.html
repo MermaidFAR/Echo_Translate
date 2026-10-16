@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>图片与漫画翻译 · Echo Translate</title>
+  <link rel="stylesheet" href="../src/ui.css">
+  <script defer src="../vendor/tesseract/tesseract.min.js"></script>
+  <script type="module" src="../src/media.js"></script>
+</head>
+<body>
+  <main class="media-page">
+    <header class="media-header"><div><h1>图片与漫画翻译</h1><p>本地识别文字，使用你配置的 API 翻译；可编辑文字框并导出图片。</p></div><nav><a href="options.html">API 设置</a><a href="documents.html">文档工作台</a></nav></header>
+    <section class="card media-toolbar" aria-label="图片来源与翻译设置">
+      <div class="media-row"><label>选择图片<input id="image-file" type="file" accept="image/png,image/jpeg,image/webp,image/gif,image/bmp"></label><label class="media-grow">图片地址<input id="image-url" type="url" placeholder="https://…"></label><button id="load-url" type="button">读取地址</button></div>
+      <div class="media-row"><label>OCR 文字语言<select id="ocr-language"><option value="eng">英语</option><option value="jpn">日语</option><option value="jpn_vert">日语竖排</option><option value="chi_sim">简体中文</option><option value="chi_tra">繁体中文</option><option value="kor">韩语</option><option value="eng+jpn">英语 + 日语</option><option value="eng+chi_sim">英语 + 简体中文</option><option value="fra">法语</option><option value="deu">德语</option><option value="spa">西班牙语</option><option value="rus">俄语</option></select></label><label>目标语言<input id="target-language" value="zh-CN" aria-label="翻译目标语言"></label><button id="recognize" type="button" disabled>识别文字</button><button id="translate" type="button" disabled>翻译文字</button><button id="cancel" type="button" hidden>停止</button><label><input id="overlay-enabled" type="checkbox" checked>显示译文覆盖</label></div>
+      <div class="media-row"><label><input id="select-region" type="checkbox">拖动框选 OCR 区域</label><button id="clear-region" type="button">恢复整图识别</button><span id="region-info">识别范围：整张图片</span></div>
+      <p class="media-note">OCR 在本机运行。点击识别时，所选语言数据会从 tessdata.projectnaptha.com 下载并缓存；图片不会上传。点击翻译时，仅识别出的文字会发送到你配置的 API。竖排漫画请选对应 OCR 语言；复杂气泡可手动加框、校正原文。</p>
+      <p id="media-status" class="media-status" role="status" aria-live="polite">选择本地图片，或粘贴可访问的图片地址。</p>
+    </section>
+    <div class="media-layout">
+      <section class="card media-preview"><div class="media-row"><strong id="image-name">图片预览</strong><span id="image-size"></span><button id="add-box" type="button" disabled>新增文字框</button><button id="export-png" type="button" disabled>导出 PNG</button><button id="export-txt" type="button" disabled>导出 TXT</button></div><div id="canvas-stage"><div id="media-empty">图片将在这里显示<br><small>支持 PNG、JPEG、WebP、GIF 首帧及 BMP</small></div><canvas id="image-canvas" hidden aria-label="图片翻译预览；点击选择文字框，可拖动移动"></canvas></div></section>
+      <aside class="card media-editor"><div class="media-row"><h2>文字框</h2><span id="block-count">0 个</span></div><p class="media-note">点击图片中的文字框或下方列表进行编辑；拖动框可以移动，数值可以精确调整。</p><div id="block-list" aria-label="识别文字列表"></div>
+        <fieldset id="block-editor" disabled><legend>选中文字框</legend><label>原文<textarea id="block-source" rows="3" placeholder="校正 OCR 识别内容"></textarea></label><label>译文<textarea id="block-translation" rows="3" placeholder="可手动填写或修改译文"></textarea></label><div class="media-grid"><label>左侧 X<input id="block-x" type="number" min="0" step="1"></label><label>顶部 Y<input id="block-y" type="number" min="0" step="1"></label><label>宽度<input id="block-width" type="number" min="1" step="1"></label><label>高度<input id="block-height" type="number" min="1" step="1"></label><label>字号（像素）<input id="block-font" type="number" min="8" max="300" step="1"></label><label>背景透明度<input id="block-opacity" type="number" min="0" max="1" step="0.05"></label><label>文字颜色<input id="block-color" type="color" value="#172637"></label><label>覆盖背景<input id="block-background" type="color" value="#ffffff"></label></div><div class="media-row"><label><input id="block-vertical" type="checkbox">竖排译文</label><button id="delete-box" type="button">删除文字框</button></div></fieldset>
+      </aside>
+    </div>
+    <footer class="media-note">视频已有字幕在网页视频左上角的“双语字幕”面板中读取、翻译或导入。本工程的 DeepSeek 文本接口不提供语音识别；无字幕音频或视频可前往<a href="audio.html">自有 ASR 音频工作台</a>配置独立转写服务。实时音频可在音频工作台由你主动选择共享音源。</footer>
+  </main>
+</body>
+</html>

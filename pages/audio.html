@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>自有 ASR 音频工作台 · Echo Translate</title>
+  <link rel="stylesheet" href="../src/ui.css">
+  <script type="module" src="../src/audio.js"></script>
+</head>
+<body>
+  <main id="audio-page">
+    <header><h1>自有 ASR 音频工作台</h1><p>将音频发送到你自己配置的 OpenAI 兼容转写服务，生成带时间的字幕，再通过 DeepSeek 翻译。</p><nav><a href="options.html#asr">配置独立 ASR 接口</a> · <a href="media.html">图片翻译</a> · <a href="documents.html">文档工作台</a></nav></header>
+    <section class="audio-card"><p id="audio-config">正在读取 ASR 配置…</p><p class="audio-note">本工程使用的 DeepSeek 文本接口不提供语音识别。此功能需要独立的 ASR 服务与密钥，例如自托管 Whisper 的 OpenAI 兼容 <code>/audio/transcriptions</code> 接口。点击“生成字幕”会将完整音频上传到该 ASR 地址，费用由该服务收取。</p><div class="audio-row"><label>音频 / 视频文件<input id="audio-file" type="file" accept="audio/*,video/mp4,video/webm,.m4a,.mp3,.mp4,.mpeg,.mpga,.wav,.webm,.ogg,.flac"></label><label>原文语言（可留空自动识别）<input id="audio-language" placeholder="例如 zh / en / ja" maxlength="20"></label><label>翻译目标语言<input id="audio-target" value="zh-CN"></label></div><audio id="audio-player" controls hidden></audio><p id="audio-caption" aria-live="off"></p><div class="audio-row"><button id="audio-transcribe" type="button" disabled>生成字幕</button><button id="audio-translate" type="button" disabled>翻译字幕</button><button id="audio-cancel" type="button" hidden>停止</button><label>导出内容<select id="audio-export-mode"><option value="bilingual">双语字幕</option><option value="translation">仅译文</option><option value="source">仅原文</option></select></label><button id="audio-export-srt" type="button" disabled>导出 SRT</button><button id="audio-export-vtt" type="button" disabled>导出 VTT</button></div><p id="audio-status" role="status" aria-live="polite">支持不超过 20 MiB 的音频 / 视频文件。实时音频请使用下方“选择音源并开始”，由你在浏览器中选择共享的标签页或会议音频。</p></section>
+    <section class="audio-columns"><div class="audio-card"><h2>原始字幕</h2><p class="audio-note">生成后可以修改原文和时间；修改后重新翻译。</p><textarea id="audio-source" rows="22" spellcheck="false" aria-label="原始字幕 SRT 或 VTT" placeholder="ASR 返回的字幕将在这里显示"></textarea></div><div class="audio-card"><h2>双语预览</h2><p class="audio-note">播放音频时同步显示当前原文与译文，导出时保留原始时间轴。</p><textarea id="audio-preview" rows="22" readonly aria-label="双语字幕预览"></textarea></div></section>
+  <section class="audio-card"><h2>实时标签页 / 会议音频</h2><p class="audio-note">主动选择共享音源并勾选音频，每 15 秒录制成独立片段，交给自己的 ASR 转写，再通过 DeepSeek 翻译。字幕会有分段与模型处理延迟。只有开始后才上传音频，停止会处理最后一段，取消会中断请求。</p><div class="audio-row"><button id="live-start" type="button">选择音源并开始</button><button id="live-stop" type="button" disabled>结束录制并处理剩余</button><button id="live-cancel" type="button" disabled>取消</button><button id="live-export" type="button" disabled>导出实时双语 SRT</button></div><div class="audio-row"><label>字幕叠加页面 <select id="live-tab"><option value="">仅在本页显示</option></select></label><button id="live-refresh-tabs" type="button">读取当前窗口网页列表</button></div><p id="live-status" role="status">需要额外配置自己的 ASR 服务；浏览器音源选择由你操作。</p><div id="live-caption" class="result" aria-live="polite"></div><label>累计原文与译文<textarea id="live-transcript" rows="8" readonly></textarea></label></section></main>
+</body>
+</html>

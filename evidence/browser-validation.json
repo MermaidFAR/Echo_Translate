@@ -1,0 +1,90 @@
+{
+  "executedAt": "2026-10-16T03:48:25.256Z",
+  "browser": "155.0.8059.40",
+  "headless": true,
+  "isolatedTemporaryProfile": true,
+  "actualUserProfileUsed": false,
+  "api": {
+    "realDeepSeekCalled": false,
+    "translationMockRequests": 19,
+    "asrMockRequests": 2
+  },
+  "longRequest": {
+    "configuredMockDelayMs": 33000,
+    "verified": true
+  },
+  "liveAudio": {
+    "actualMediaRecorder": true,
+    "input": "AudioContext 人工合成音轨",
+    "nativeGetDisplayMediaCalled": false,
+    "systemAudioOrMicrophoneCaptured": false,
+    "asrAndTranslation": "本地 mock",
+    "verified": true
+  },
+  "screenshots": [
+    "evidence/screenshots/options.png",
+    "evidence/screenshots/documents.png",
+    "evidence/screenshots/media.png"
+  ],
+  "results": [
+    {
+      "name": "设置页、模型列表、公开配置无密钥、API 测试",
+      "status": "pass",
+      "durationMs": 311
+    },
+    {
+      "name": "真实 content script：双语、隐藏与代码排除、动态段落、恢复原 DOM 与监听器",
+      "status": "pass",
+      "durationMs": 619
+    },
+    {
+      "name": "选中解释与输入框翻译触发真实消息链",
+      "status": "pass",
+      "durationMs": 43
+    },
+    {
+      "name": "仅译文模式、侧栏翻译与请求取消",
+      "status": "pass",
+      "durationMs": 33429
+    },
+    {
+      "name": "TXT、HTML、JSON 与字幕：导入、mock 翻译、双语导出和结构保留",
+      "status": "pass",
+      "durationMs": 563
+    },
+    {
+      "name": "DOCX 与 EPUB：本地 ZIP vendor、正文翻译导出及未改附件保留",
+      "status": "pass",
+      "durationMs": 242
+    },
+    {
+      "name": "PDF：实际本地 worker 提取、canvas 预览、中文字体与双语 PDF 导出",
+      "status": "pass",
+      "durationMs": 404
+    },
+    {
+      "name": "图片：本地组件加载、编辑文字框、mock 翻译、PNG/TXT 导出",
+      "status": "pass",
+      "durationMs": 431
+    },
+    {
+      "name": "独立 ASR：multipart mock 转写、字幕翻译、SRT/VTT 导出",
+      "status": "pass",
+      "durationMs": 338
+    },
+    {
+      "name": "实时音频：真实 MediaRecorder 合成音源、finish/abort、mock 直播字幕链与网页叠加",
+      "status": "pass",
+      "durationMs": 1069
+    }
+  ],
+  "pageErrors": [],
+  "notCovered": [
+    "真实 DeepSeek API 与计费",
+    "真实第三方 ASR 服务",
+    "真实系统音源选择器、会议平台或直播音轨采集",
+    "真实 YouTube/各站点专用适配",
+    "大型复杂文档与精准 PDF 版式重排",
+    "各 OCR 语言、手写体与复杂漫画"
+  ]
+}
