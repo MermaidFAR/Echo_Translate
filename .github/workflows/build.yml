@@ -44,12 +44,12 @@ jobs:
           Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/notofonts/noto-cjk/f8d157532fbfaeda587e826d4cd5b21a49186f7c/Sans/OTF/SimplifiedChinese/NotoSansCJKsc-Regular.otf' -OutFile $fontPath
           if ((Get-FileHash -LiteralPath $fontPath -Algorithm SHA256).Hash -ne '2C76254F6FC379FDDFCE0A7E84FB5385BB135D3E399294F6EEB6680D0365B74B') { throw 'Test font checksum mismatch.' }
           "ECHO_TEST_FONT=$fontPath" >> $env:GITHUB_ENV
+      - name: Build extension
+        run: npm run build
       - name: Static checks
         run: |
           npm run check | Tee-Object -FilePath evidence/check-output.txt
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-      - name: Build extension
-        run: npm run build
       - name: Unit and isolated Chrome tests
         run: |
           npm test | Tee-Object -FilePath evidence/test-output.txt

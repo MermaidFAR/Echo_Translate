@@ -69,8 +69,8 @@
 git clone https://github.com/MermaidFAR/Echo_Translate.git
 cd Echo_Translate
 npm ci
-npm run check
 npm run build
+npm run check
 npm test
 ```
 
