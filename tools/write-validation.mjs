@@ -43,7 +43,7 @@ const validation = {
   browser, ocr, readingLayout,
   boundaries: { realDeepSeekApiCalled: false, realAsrApiCalled: false, paidModelUsage: false,
     userBrowserProfileAccessed: false, externalPublicDownload: 'OCR 英语语言数据（tessdata.projectnaptha.com）',
-    localTestFont: 'C:/Windows/Fonts/simhei.ttf，仅用于测试，不随成品打包' },
+    localTestFont: `${process.env.ECHO_TEST_FONT || 'C:/Windows/Fonts/simhei.ttf'}，仅用于测试，不随成品打包` },
 };
 await writeFile(path.join(root, 'evidence/validation.json'), `${JSON.stringify(validation, null, 2)}\n`);
 console.log(`最终验证记录：evidence/validation.json（${validation.status}，${testResults.passed}/${testResults.tests} tests）`);

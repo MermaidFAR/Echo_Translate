@@ -81,7 +81,7 @@ async function zipDirectory(directory, prefix = '') {
 async function createSourceArchive() {
   const files = {};
   for (const name of ['manifest.json', 'package.json', 'package-lock.json', 'src', 'pages', 'tools', 'tests', 'assets',
-    'README.md', 'REA_Report.md', 'AGENTS.md', '.gitignore', 'THIRD_PARTY_NOTICES.txt', 'LICENSE']) {
+    'README.md', 'REA_Report.md', 'AGENTS.md', '.github', '.gitignore', 'THIRD_PARTY_NOTICES.txt', 'LICENSE']) {
     const entry = path.join(root, name);
     if (!(await exists(entry))) continue;
     if ((await stat(entry)).isDirectory()) Object.assign(files, await zipDirectory(entry, `${name}/`));

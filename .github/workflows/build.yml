@@ -1,0 +1,117 @@
+name: Build and release
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: ${{ !startsWith(github.ref, 'refs/tags/') }}
+
+jobs:
+  build:
+    name: Check, test and package
+    runs-on: windows-2025
+    timeout-minutes: 20
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Check versions
+        run: |
+          node --input-type=module -e "import fs from 'node:fs'; import assert from 'node:assert/strict'; const read = p => JSON.parse(fs.readFileSync(p)); const version = read('package.json').version; assert.equal(read('manifest.json').version, version); assert.equal(read('package-lock.json').version, version); assert.equal(read('package-lock.json').packages[''].version, version); if (process.env.GITHUB_REF.startsWith('refs/tags/')) assert.equal(process.env.GITHUB_REF_NAME, 'v' + version, 'Tag must match the package version'); console.log('Version: ' + version);"
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Prepare browser and test font
+        run: |
+          $chromePath = 'C:\Program Files\Google\Chrome\Application\chrome.exe'
+          if (-not (Test-Path -LiteralPath $chromePath)) { throw 'Chrome is missing from the runner image.' }
+          "ECHO_CHROME_PATH=$chromePath" >> $env:GITHUB_ENV
+          $fontPath = Join-Path $env:RUNNER_TEMP 'NotoSansCJKsc-Regular.otf'
+          Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/notofonts/noto-cjk/f8d157532fbfaeda587e826d4cd5b21a49186f7c/Sans/OTF/SimplifiedChinese/NotoSansCJKsc-Regular.otf' -OutFile $fontPath
+          if ((Get-FileHash -LiteralPath $fontPath -Algorithm SHA256).Hash -ne '2C76254F6FC379FDDFCE0A7E84FB5385BB135D3E399294F6EEB6680D0365B74B') { throw 'Test font checksum mismatch.' }
+          "ECHO_TEST_FONT=$fontPath" >> $env:GITHUB_ENV
+      - name: Static checks
+        run: |
+          npm run check | Tee-Object -FilePath evidence/check-output.txt
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Build extension
+        run: npm run build
+      - name: Unit and isolated Chrome tests
+        run: |
+          npm test | Tee-Object -FilePath evidence/test-output.txt
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Local OCR smoke test
+        run: npm run test:ocr
+      - name: Dependency audit
+        run: |
+          npm audit --omit=dev --json | Set-Content -Path evidence/dependency-audit.json -Encoding utf8
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Verify and finalize packages
+        run: |
+          npm run validation:report
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node tools/build.mjs --source-only
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Get-Content dist/SHA256SUMS.txt
+      - name: Upload packages
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: Echo_Translate-${{ github.sha }}
+          path: |
+            dist/Echo_Translate.zip
+            dist/Echo_Translate_Source.zip
+            dist/SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 30
+      - name: Upload test evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: Test_Evidence-${{ github.sha }}
+          path: |
+            evidence/*validation.json
+            evidence/*output.txt
+            evidence/dependency-audit.json
+            evidence/screenshots/
+          if-no-files-found: warn
+          retention-days: 14
+
+  release:
+    name: Publish tagged release
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: Echo_Translate-${{ github.sha }}
+          path: release
+      - name: Verify release assets
+        working-directory: release
+        run: sha256sum --check SHA256SUMS.txt
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          args=()
+          if [[ "$RELEASE_TAG" == v0.* || "$RELEASE_TAG" == *-* ]]; then args+=(--prerelease); fi
+          gh release create "$RELEASE_TAG" release/Echo_Translate.zip release/Echo_Translate_Source.zip release/SHA256SUMS.txt --verify-tag --generate-notes --title "$RELEASE_TAG" "${args[@]}"

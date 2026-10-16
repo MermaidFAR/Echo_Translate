@@ -4,6 +4,8 @@
 
 [GitHub 源码](https://github.com/MermaidFAR/Echo_Translate) · [安装包与发布记录](https://github.com/MermaidFAR/Echo_Translate/releases) · [问题反馈](https://github.com/MermaidFAR/Echo_Translate/issues)
 
+[![Build and release](https://github.com/MermaidFAR/Echo_Translate/actions/workflows/build.yml/badge.svg)](https://github.com/MermaidFAR/Echo_Translate/actions/workflows/build.yml)
+
 ## 安装与接入
 
 - 从 [Releases](https://github.com/MermaidFAR/Echo_Translate/releases) 下载 `Echo_Translate.zip` 并解压；本地构建后也可直接使用 `dist/Echo_Translate` 文件夹。
@@ -72,7 +74,15 @@ npm run build
 npm test
 ```
 
-`npm test` 包含隔离无头 Chrome 的集成测试；单独复跑浏览器可用 `npm run test:browser`。浏览器测试需要 Playwright；当前优先复用 Codex 打包运行时，也可通过 `ECHO_PLAYWRIGHT_PATH` 指定现有安装，通过 `ECHO_CHROME_PATH` 指定 Chrome。测试创建临时独立用户目录，不操作日常浏览器。
+`npm test` 包含隔离无头 Chrome 的集成测试；单独复跑浏览器可用 `npm run test:browser`。浏览器测试优先使用 lockfile 中的 Playwright Core，缺失时可复用 Codex 打包运行时；也可通过 `ECHO_PLAYWRIGHT_PATH` 指定现有安装，通过 `ECHO_CHROME_PATH` 指定 Chrome，通过 `ECHO_TEST_FONT` 指定用于 PDF 导出测试的中文 TTF / OTF 字体。测试创建临时独立用户目录，不操作日常浏览器。
+
+### 自动构建与发布
+
+[GitHub Actions](https://github.com/MermaidFAR/Echo_Translate/actions/workflows/build.yml) 在推送 `main`、提交 PR 和手动运行时，自动安装锁定依赖、静态检查、构建、运行全部测试及 OCR 实测，并检查生产依赖。成功后在该次运行的 Artifacts 提供安装包、源码包和 SHA-256，保留 30 天；测试日志和截图保留 14 天。无需配置 DeepSeek 或 ASR 密钥，翻译接口使用本地模拟服务。
+
+云端使用 Windows Server 2025、Node.js 24 和隔离无头 Chrome；PDF 测试字体从 Noto 官方仓库的固定提交下载并校验 SHA-256，仅供测试，不打包进扩展。
+
+发布新版本时，先同步修改 `manifest.json`、`package.json` 和 lockfile 的版本，提交并推送代码，再推送对应的 `v` 标签，例如版本 `0.1.2` 对应 `v0.1.2`。标签与工程版本不一致会中止发布；检查全部通过后，流水线自动创建 Release 并附上三个下载文件。`0.x` 及带预发布后缀的标签会标记为预览版。已有 Release 保持原发布内容，更新使用新标签。
 
 源码入口：`src/background.js` 负责消息、请求和取消；`src/api.js` 负责分段、协议、并发和重试；`src/content.js` 负责网页；`src/documents.js` 和 `file-formats.js` 负责文档；`src/media.js`、`subtitles.js`、`audio.js` 负责媒体。`tools/build.mjs` 生成可安装文件夹及 ZIP，依赖版本固定在 lockfile。
 

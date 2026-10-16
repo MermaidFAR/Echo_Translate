@@ -241,7 +241,7 @@ test('隔离无头 Chrome：扩展实际加载、网页/设置/文档/媒体通�
       await translateDocument('sample.pdf', await source.save(), 'application/pdf');
       assert.equal(await documentPage.locator('#pdf-original-panel').isVisible(), true);
       assert.ok(await documentPage.locator('#pdf-page-canvas').evaluate(canvas => canvas.width > 0 && canvas.height > 0));
-      await documentPage.locator('#pdf-font-file').setInputFiles('C:/Windows/Fonts/simhei.ttf');
+      await documentPage.locator('#pdf-font-file').setInputFiles(process.env.ECHO_TEST_FONT || 'C:/Windows/Fonts/simhei.ttf');
       await documentPage.waitForFunction(() => document.querySelector('#pdf-font-status').textContent.startsWith('已载入字体'));
       const output = await downloadBytes(documentPage, '#export-document');
       assert.equal((await PDFDocument.load(output)).getPageCount(), 2);
